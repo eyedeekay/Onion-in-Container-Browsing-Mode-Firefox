@@ -1,0 +1,20 @@
+#!/usr/bin/make -f
+
+%:
+	dh $@
+
+override_dh_auto_install:
+	mkdir -p $$(pwd)/debian/onionsetproxy.js/usr/share/webext/onioncbt@eyedeekay.github.io \
+		$$(pwd)/debian/onionsetproxy.js/usr/share/mozilla/extensions/{ec8030f7-c20a-464f-9b0e-13a3a9e97384}
+	cp -r ./chromium/ $$(pwd)/debian/onionsetproxy.js/usr/share/webext/onioncbt@eyedeekay.github.io/
+	cp -r ./icons/ $$(pwd)/debian/onionsetproxy.js/usr/share/webext/onioncbt@eyedeekay.github.io/
+	cp -r ./options/ $$(pwd)/debian/onionsetproxy.js/usr/share/webext/onioncbt@eyedeekay.github.io/
+	cp -r ./_locales/ $$(pwd)/debian/onionsetproxy.js/usr/share/webext/onioncbt@eyedeekay.github.io/
+	cp ./*.js $$(pwd)/debian/onionsetproxy.js/usr/share/webext/onioncbt@eyedeekay.github.io/
+	cp ./*.html $$(pwd)/debian/onionsetproxy.js/usr/share/webext/onioncbt@eyedeekay.github.io/
+	cp ./*.css $$(pwd)/debian/onionsetproxy.js/usr/share/webext/onioncbt@eyedeekay.github.io/
+	cp ./*.md $$(pwd)/debian/onionsetproxy.js/usr/share/webext/onioncbt@eyedeekay.github.io/
+	cp ./manifest.json $$(pwd)/debian/onionsetproxy.js/usr/share/webext/onioncbt@eyedeekay.github.io/
+	cp ./LICENSE $$(pwd)/debian/onionsetproxy.js/usr/share/webext/onioncbt@eyedeekay.github.io/
+	ln -sf $$(pwd)/debian/onionsetproxy.js/usr/share/webext/onioncbt@eyedeekay.github.io \
+		$$(pwd)/debian/onionsetproxy.js/usr/share/mozilla/extensions/{ec8030f7-c20a-464f-9b0e-13a3a9e97384}

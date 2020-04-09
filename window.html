@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="info.css"/>
+  </head>
+
+  <body>
+    <div class="panel">
+      <div class="panel-section panel-section-header">
+        <div id="text-section-header" class="text-section-header">Onion Assistance</div>
+      </div>
+
+      <div id="text-section-helptext">
+      You are now free to browse the eepWeb!
+
+      Your browser is now configured to browse anonymously on the Onion network.
+      As you browse, your traffic will be routed through other network nodes
+      to disguise it's origin, both from the server and from the nodes
+      themselves.
+
+      </div>
+
+      <div class="panel-section-separator"></div>
+          <!-- This is where I'll eventually put the tunnel control panel -->
+          <!-- <a href="#" id="generate-fresh-tunnel> Generate a Fresh Tunnel</a>"-->
+          <!-- -->
+      <strong><a href="#" id="clear-browser-data">Clear all browsing data</a></strong><br>
+      <div class="panel-section-separator"></div>
+          <a href="http://onionforum.onion" id="window-create-forum-panel">Visit the Onion Forums</a><br>
+          <a href="http://onion-projekt.onion/blog" id="window-create-news-panel">Get the latest Onion News</a><br>
+      <div class="panel-section-separator"></div>
+          <!--<div id="proxy-health">Proxy is:</div>-->
+          <input type="checkbox" id="enable-web-rtc" name="enablewebrtc" value="webrtc">
+          <label for="enable-web-rtc">Enable WebRTC <strong>with Proxy?</strong></label>
+      <div class="panel-section-separator"></div>
+          <a href="#" id="check-onion-control">Check Onion Router Health</a><div id="panel-section-onioncontrol-check"></div>
+      <div class="panel-section-separator"></div>
+      <div class="panel-section-identity">
+          <div id="identity-list"></div>
+      </div>
+
+    </div>
+
+
+  <script src="context.js"></script>
+  <script src="privacy.js"></script>
+  <script src="info.js"></script>
+  <script src="content.js" crossorigin="anonymous"></script>
+  <script src="onioncontrol.js"></script>
+
+</body>
+
+</html>

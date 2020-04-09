@@ -1,0 +1,6 @@
+Onion in Container Browsing Mode
+============================
+
+A simple plugin for configuring a Firefox based web browser to isolate Onion
+Browsing to a single contextual identity, thus creating an Onion in Container
+Browsing mode. It requires the use of a pre-installed Onion Router.

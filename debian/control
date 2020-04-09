@@ -1,0 +1,17 @@
+Source: onionsetproxy.js
+Section: unknown
+Priority: optional
+Maintainer: idk <hankhill19580@gmail.com>
+Build-Depends: debhelper (>=11~)
+Standards-Version: 4.1.4
+Homepage: https://github.com/eyedeekay/onionsetproxy.js
+
+Package: onionsetproxy.js
+Architecture: any
+Multi-Arch: foreign
+Depends: ${misc:Depends}, ${shlibs:Depends}
+Description: Plugin for configuring onion in Firefox and Chromium
+ This is a webextension which safely configures a Browser on the
+ Debian operating system to use Onion. onionsetproxy.js users form
+ their own anonymity set, like TAILS users or Brave users do on
+ the Tor network.
