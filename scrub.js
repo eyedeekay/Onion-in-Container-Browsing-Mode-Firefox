@@ -94,7 +94,6 @@ var contextSetup = async function(requestDetails) {
             function onCreated(tab) {
               console.log("(isolate) Closing old, un-isolated tab");
               browser.tabs.remove(tabId.id);
-              browser.tabs.remove(window.tabs[0].id);
             }
             function onError(error) {
               console.log(`Error: ${error}`);

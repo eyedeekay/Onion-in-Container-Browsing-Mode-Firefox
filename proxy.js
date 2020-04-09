@@ -21,14 +21,14 @@ var handleContextProxyRequest = async function(requestDetails) {
       proxy = {
         failoverTimeout: 0,
         type: "direct",
-        proxyDns: false
+        proxyDNS: false
       };
       if (context.name == "onionbrowser") {
         proxy = {
           type: getScheme(),
           host: getHost(),
           port: getPort(),
-          proxyDns: true
+          proxyDNS: true
         };
         console.log(
           "(proxy)Using",

@@ -20,7 +20,7 @@ var handleContextProxyRequest = async function(requestDetails) {
       proxy = {
         failoverTimeout: 0,
         type: "direct",
-        proxyDns: false
+        proxyDNS: false
       };
       if (context.name == "onionbrowser") {
         proxy = {
