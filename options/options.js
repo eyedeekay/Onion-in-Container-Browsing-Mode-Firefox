@@ -120,7 +120,7 @@ function SetControlHelpText() {
 
 function getScheme() {
   const proxy_scheme = document.querySelector("#proxy_scheme");
-  console.log("(options)Got i2p proxy scheme:", proxy_scheme.value);
+  console.log("(options)Got Tor proxy scheme:", proxy_scheme.value);
   if (proxy_scheme.value == "HTTP") {
     return "socks";
   }

@@ -1,6 +1,6 @@
 Format: https://www.debian.org/doc/packaging-manuals/copyright-format/1.0/
-Upstream-Name: onionsetproxy.js
-Source: https://github.com/eyedeekay/onionsetproxy.js
+Upstream-Name: onionbct.js
+Source: https://github.com/eyedeekay/onionbct.js
 
 Files:     .gitignore
            Makefile
@@ -12,8 +12,8 @@ Files:     .gitignore
            .circleci/config.yml
            experiments/oniontab.md
            experiments/tunblink.md
-           onionsetproxy.js.png
-           onionsetproxy.js@eyedeekay.github.io.xpi
+           onionbct.js.png
+           onionbct.js@eyedeekay.github.io.xpi
            icons/toopie.png
            info.css
            info.js
