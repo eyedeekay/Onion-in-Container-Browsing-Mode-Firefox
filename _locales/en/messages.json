@@ -4,7 +4,7 @@
     "description": "Name of the extension."
   },
   "extensionDescription": {
-    "message": "Set up a browser to use the onion http proxy automatically",
+    "message": "Set up a browser to use Tor SOCKS proxy for enhanced privacy.",
     "description": "Description of the extension."
   },
   "titlePreface": {
@@ -17,14 +17,14 @@
   },
   "resetMessage": {
     "message": "Reset Tunnel",
-    "description": "Message for the Reset Tunnel button"
+    "description": "Message for the Control Port"
   },
   "infoTitle": {
     "message": "Onion Help",
     "description": "Title for the help menu"
   },
   "infoMessage": {
-    "message": "You are now free to browse the eepWeb! Your browser is now configured to browse anonymously on the Onion network. As you browse, your traffic will be routed through other network nodes to disguise it's origin, both from the server and from the nodes themselves.",
+    "message": "When you create an Onion Browsing tab, traffic for that tab is proxied over Tor. It enhances your privacy by hiding your location from the servers you visit and from network observers. Combined with anti-fingerprinting technology and diligent browsing habits, it is capable of enhancing your privacy when browsing the web.",
     "description": "Help Message"
   },
   "helpMessage": {
@@ -32,7 +32,7 @@
     "description": "Help Message"
   },
   "newsMessage": {
-    "message": "Visit the Onion Blog to learn the latest about onion.",
+    "message": "Visit the Tor Project Website to learn the latest about onion.",
     "description": "Help Message"
   },
   "forumMessage": {
@@ -53,14 +53,14 @@
   },
   "controlHelpText": {
     "message": "These options will be inert if used with the default onion HTTP or SOCKS proxy.",
-    "description": "Help for configuring the options for the Reset Tunnel button"
+    "description": "Help for configuring the options for the Control Port"
   },
   "controlHostText": {
     "message": "Control Host: ",
-    "description": "Host for the Reset Tunnel button"
+    "description": "Host for the Control Port"
   },
   "controlPortText": {
     "message": "Control Port: ",
-    "description": "Port for the Reset Tunnel button"
+    "description": "Port for the Control Port"
   }
 }
