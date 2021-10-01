@@ -13,20 +13,20 @@ function SetControlHostText() {
   controlhostid.textContent = chrome.i18n.getMessage("controlHostText");
 }
 
-var handleContextProxyRequest = async function(requestDetails) {
+var handleContextProxyRequest = async function (requestDetails) {
   console.log("(proxy)Searching for proxy by context");
   try {
-    var handleProxyRequest = function(context) {
+    var handleProxyRequest = function (context) {
       proxy = {
         failoverTimeout: 0,
         type: "direct",
-        proxyDNS: false
+        proxyDNS: false,
       };
       if (context.name == "onionbrowser") {
         proxy = {
           type: getScheme(),
           host: getHost(),
-          port: getPort()
+          port: getPort(),
         };
         console.log(
           "(proxy)Using",
@@ -38,7 +38,7 @@ var handleContextProxyRequest = async function(requestDetails) {
       }
       return proxy;
     };
-    var contextGet = async function(tabInfo) {
+    var contextGet = async function (tabInfo) {
       try {
         console.log("(proxy)Tab info from Function", tabInfo);
         context = await browser.contextualIdentities.get(tabInfo.cookieStoreId);
@@ -47,10 +47,10 @@ var handleContextProxyRequest = async function(requestDetails) {
         console.log("(proxy)Context Error", error);
       }
     };
-    var tabFind = async function(tabId) {
+    var tabFind = async function (tabId) {
       try {
         context = await browser.contextualIdentities.query({
-          name: "onionbrowser"
+          name: "onionbrowser",
         });
         tabId.cookieStoreId = context[0].cookieStoreId;
         console.log("(proxy) forcing context", tabId.cookieStoreId);
@@ -59,7 +59,7 @@ var handleContextProxyRequest = async function(requestDetails) {
         console.log("(proxy)Context Error", error);
       }
     };
-    var tabGet = async function(tabId) {
+    var tabGet = async function (tabId) {
       try {
         console.log("(proxy)Tab ID from Request", tabId);
         let tabInfo = await browser.tabs.get(tabId);
@@ -102,7 +102,7 @@ function setupProxy() {
   /**/
   console.log("Setting up Firefox WebExtension proxy");
   browser.proxy.onRequest.addListener(handleContextProxyRequest, {
-    urls: ["<all_urls>"]
+    urls: ["<all_urls>"],
   });
   console.log("onion settings created for WebExtension Proxy");
   /**/
@@ -203,7 +203,7 @@ function storeSettings() {
     proxy_host,
     proxy_port,
     control_host,
-    control_port
+    control_port,
   });
   console.log("storing proxy scheme:", proxy_scheme);
   console.log("storing proxy host:", proxy_host);
@@ -245,7 +245,7 @@ function updateUI(restoredSettings) {
 function onError(e) {
   console.error(e);
 }
-chrome.storage.local.get(function(got) {
+chrome.storage.local.get(function (got) {
   checkStoredSettings(got);
   updateUI(got);
 });

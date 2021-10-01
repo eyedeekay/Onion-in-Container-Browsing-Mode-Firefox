@@ -10,7 +10,7 @@ function onGot(contexts) {
       .create({
         name: "onionbrowser",
         color: "purple",
-        icon: "fingerprint"
+        icon: "fingerprint",
       })
       .then(onCreated, onError);
   }
@@ -19,7 +19,7 @@ function onGot(contexts) {
       .create({
         name: "routerconsole",
         color: "turquoise",
-        icon: "briefcase"
+        icon: "briefcase",
       })
       .then(onCreated, onError);
   }
@@ -67,15 +67,15 @@ function themeWindow(window) {
           chrome.theme.update(window.id, {
             colors: {
               frame: "#2D4470",
-              toolbar: "#2D4470"
-            }
+              toolbar: "#2D4470",
+            },
           });
         } else {
           chrome.theme.update(window.id, {
             colors: {
               frame: "#9DABD5",
-              toolbar: "#9DABD5"
-            }
+              toolbar: "#9DABD5",
+            },
           });
         }
       } else if (context.name == "routerconsole") {
@@ -84,15 +84,15 @@ function themeWindow(window) {
           chrome.theme.update(window.id, {
             colors: {
               frame: "#00CED1",
-              toolbar: "#00CED1"
-            }
+              toolbar: "#00CED1",
+            },
           });
         } else {
           chrome.theme.update(window.id, {
             colors: {
               frame: "#40E0D0",
-              toolbar: "#40E0D0"
-            }
+              toolbar: "#40E0D0",
+            },
           });
         }
       } else {
@@ -110,7 +110,7 @@ function themeWindow(window) {
 
   var querying = browser.tabs.query({
     currentWindow: true,
-    active: true
+    active: true,
   });
   querying.then(logTabs, onError);
 }
@@ -126,11 +126,11 @@ function setTitle(window) {
         console.log("Active in Onion window");
         if (window.incognito) {
           chrome.windows.update(window.id, {
-            titlePreface: titleprefpriv
+            titlePreface: titleprefpriv,
           });
         } else {
           chrome.windows.update(window.id, {
-            titlePreface: titlepref
+            titlePreface: titlepref,
           });
         }
       }
@@ -144,7 +144,7 @@ function setTitle(window) {
 
   var querying = browser.tabs.query({
     currentWindow: true,
-    active: true
+    active: true,
   });
   querying.then(logTabs, onError);
 }
@@ -152,14 +152,14 @@ function setTitle(window) {
 chrome.windows.onCreated.addListener(() => {
   //var gettingStoredSettings = chrome.storage.local.get();
   //gettingStoredSettings.then(setupProxy, onError);
-  chrome.storage.local.get(function(got) {
+  chrome.storage.local.get(function (got) {
     setupProxy();
   });
 });
 
 chrome.tabs.onCreated.addListener(() => {
   var getting = browser.windows.getCurrent({
-    populate: true
+    populate: true,
   });
   getting.then(setTitle, onError);
 });

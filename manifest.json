@@ -34,6 +34,13 @@
     "default_title": "__MSG_extensionName__",
     "default_popup": "window.html"
   },
+  "page_action": {
+    "browser_style": true,
+    "default_title": "__MSG_extensionName__",
+    "default_icon": "icons/onion.png",
+    "show_matches": ["http://*.onion/*", "https://*.onion/*"],
+    "pinned": true
+  },
   "options_ui": {
     "page": "options/options.html"
   },

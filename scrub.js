@@ -1,7 +1,7 @@
-var contextScrub = async function(requestDetails) {
+var contextScrub = async function (requestDetails) {
   console.log("(scrub)Scrubbing info from contextualized request");
   try {
-    var headerScrub = function(context) {
+    var headerScrub = function (context) {
       if (!context) {
         console.error("Context not found");
       } else {
@@ -16,12 +16,12 @@ var contextScrub = async function(requestDetails) {
             }
           }
           return {
-            requestHeaders: requestDetails.requestHeaders
+            requestHeaders: requestDetails.requestHeaders,
           };
         }
       }
     };
-    var contextGet = async function(tabInfo) {
+    var contextGet = async function (tabInfo) {
       try {
         console.log("(scrub)Tab info from Function", tabInfo);
         context = await browser.contextualIdentities.get(tabInfo.cookieStoreId);
@@ -30,10 +30,10 @@ var contextScrub = async function(requestDetails) {
         console.log("(scrub)Conext Error", error);
       }
     };
-    var tabFind = async function(tabId) {
+    var tabFind = async function (tabId) {
       try {
         context = await browser.contextualIdentities.query({
-          name: "onionbrowser"
+          name: "onionbrowser",
         });
         tabId.cookieStoreId = context[0].cookieStoreId;
         console.log("(scrub) forcing context", tabId.cookieStoreId);
@@ -42,7 +42,7 @@ var contextScrub = async function(requestDetails) {
         console.log("(scrub)Context Error", error);
       }
     };
-    var tabGet = async function(tabId) {
+    var tabGet = async function (tabId) {
       try {
         console.log("(scrub)Tab ID from Request", tabId);
         let tabInfo = await browser.tabs.get(tabId);
@@ -74,13 +74,13 @@ var contextScrub = async function(requestDetails) {
   }
 };
 
-var contextSetup = async function(requestDetails) {
+var contextSetup = async function (requestDetails) {
   console.log("(isolate)Forcing Onion requests into context");
   try {
-    var tabFind = async function(tabId) {
+    var tabFind = async function (tabId) {
       try {
         context = await browser.contextualIdentities.query({
-          name: "onionbrowser"
+          name: "onionbrowser",
         });
         if (tabId.cookieStoreId != context[0].cookieStoreId) {
           console.log(
@@ -102,7 +102,7 @@ var contextSetup = async function(requestDetails) {
               active: true,
               cookieStoreId: context[0].cookieStoreId,
               url: requestDetails.url,
-              windowId: window.id
+              windowId: window.id,
             });
             created.then(onCreated, onError);
           }
@@ -114,10 +114,10 @@ var contextSetup = async function(requestDetails) {
         console.log("(isolate)Context Error", error);
       }
     };
-    var routerTabFind = async function(tabId) {
+    var routerTabFind = async function (tabId) {
       try {
         context = await browser.contextualIdentities.query({
-          name: "routerconsole"
+          name: "routerconsole",
         });
         if (tabId.cookieStoreId != context[0].cookieStoreId) {
           console.log(
@@ -140,7 +140,7 @@ var contextSetup = async function(requestDetails) {
               active: true,
               cookieStoreId: context[0].cookieStoreId,
               url: requestDetails.url,
-              windowId: window.id
+              windowId: window.id,
             });
             created.then(onCreated, onError);
           }
@@ -152,7 +152,7 @@ var contextSetup = async function(requestDetails) {
         console.log("(isolate)Context Error", error);
       }
     };
-    var tabGet = async function(tabId) {
+    var tabGet = async function (tabId) {
       try {
         console.log("(isolate)Tab ID from Request", tabId);
         let tabInfo = await browser.tabs.get(tabId);
@@ -201,4 +201,180 @@ browser.webRequest.onBeforeSendHeaders.addListener(
   contextScrub,
   { urls: ["<all_urls>"] },
   ["blocking", "requestHeaders"]
+);
+
+var coolheadersSetup = function (e) {
+  var asyncSetPageAction = new Promise((resolve, reject) => {
+    window.setTimeout(() => {
+      if (e.tabId != undefined) {
+        popup = browser.pageAction.getPopup({ tabId: e.tabId });
+        popup.then(gotPopup);
+      }
+      function gotPopup(p) {
+        console.log("(scrub)(header check) checking popup", p);
+        console.log(
+          "(scrub)(header check) checking headers",
+          e.responseHeaders
+        );
+        let headers = e.responseHeaders.filter((word) =>
+          word.name.toUpperCase().includes("ONION")
+        );
+        console.log("(scrub)(header check) checking filtered headers", headers);
+        for (i = headers.length - 1; i >= 0; i--) {
+          let header = headers[i];
+          console.log("(scrub)(header check) checking header", header);
+          if (header.name.toUpperCase().endsWith("ONION-LOCATION")) {
+            var tab = browser.tabs.get(e.tabId);
+            tab.then(altSrc);
+            function altSrc(tab) {
+              console.log("(scrub) X-ONION-LOCATION", header.value);
+              let url = new URL(header.value);
+              browser.pageAction.setPopup({
+                tabId: e.tabId,
+                popup: "location.html",
+              });
+              browser.pageAction.setIcon({
+                path: "icons/onion.png",
+                tabId: e.tabId,
+              });
+              let eurl = new URL(tab.url);
+              console.log("(scrub)(header check) formatted url", eurl);
+              browser.pageAction.setTitle({
+                tabId: e.tabId,
+                title: "http://" + url.host + eurl.pathname,
+              });
+              browser.pageAction.show(e.tabId);
+            }
+            break;
+          }
+        }
+      }
+      resolve({ responseHeaders: e.responseHeaders });
+    }, 2000);
+  });
+  return asyncSetPageAction;
+};
+
+function getTabURL(tab) {
+  console.log("(scrub)(equiv check) popup check", tab);
+
+  if (tab.id != undefined) {
+    popup = browser.pageAction.getPopup({ tabId: tab.id });
+    console.log("(scrub)(equiv check) popup check");
+    popup.then(gotPopup);
+  }
+  function gotPopup(p) {
+    if (p.length != 0) return;
+    if (tab.url.startsWith("https")) {
+      if (tab.url.includes(".onion")) {
+        browser.pageAction.setPopup({
+          tabId: tab.id,
+          popup: "security.html",
+        });
+        browser.pageAction.setIcon({
+          path: "icons/onion.png",
+          tabId: tab.id,
+        });
+        console.log(tab.url);
+      } else {
+        try {
+          browser.tabs
+            .sendMessage(tab.id, { req: "onion-location" })
+            .then((response) => {
+              if (response != undefined) {
+                console.log(
+                  "(scrub)(equiv check) onion-location response object",
+                  response
+                );
+                if (response.content.toUpperCase() != "NO-ALT-LOCATION") {
+                  browser.pageAction.setPopup({
+                    tabId: tab.id,
+                    popup: "location.html",
+                  });
+                  browser.pageAction.setIcon({
+                    path: "icons/onion.png",
+                    tabId: tab.id,
+                  });
+                  browser.pageAction.setTitle({
+                    tabId: tab.id,
+                    title: response.content,
+                  });
+                  browser.pageAction.show(tab.id);
+                }
+              }
+            });
+          console.log("(scrub)(equiv check)", tab.id, tab.url);
+        } catch (e) {
+          console.log("(scrub)(equiv check)", e);
+        }
+      }
+    }
+  }
+}
+
+function getClearTab(tobj) {
+  function setupTabs(tobj) {
+    if (typeof tobj == "number") {
+      browser.tabs.get(tobj).then(getTabURL, onError);
+    }
+    if (typeof tobj.tabId == "number") {
+      console.log("(scrub) tobj", tobj);
+      browser.tabs.get(tobj.tabId).then(getTabURL, onError);
+    } else {
+      for (let tab in tobj.tabIds) {
+        console.log("(scrub) tab", tobj.tabIds[tab]);
+        browser.tabs.get(tobj.tabIds[tab]).then(getTabURL, onError);
+      }
+    }
+  }
+  if (tobj != undefined) {
+    setupTabs(tobj);
+  } else {
+    browser.tabs.query({}).then(setupTabs);
+  }
+}
+
+// Listen for onHeaderReceived for the target page.
+// Set "blocking" and "responseHeaders".
+browser.webRequest.onHeadersReceived.addListener(
+  coolheadersSetup,
+  { urls: ["*://*.onion/*", "https://*/*"] },
+  ["responseHeaders"]
+);
+
+browser.tabs.onActivated.addListener(getClearTab);
+browser.tabs.onAttached.addListener(getClearTab);
+browser.tabs.onCreated.addListener(getClearTab);
+browser.tabs.onDetached.addListener(getClearTab);
+browser.tabs.onHighlighted.addListener(getClearTab);
+browser.tabs.onMoved.addListener(getClearTab);
+browser.tabs.onReplaced.addListener(getClearTab);
+
+browser.pageAction.onClicked.addListener(getClearTab);
+
+function reloadTabs(tabs) {
+  for (let tab of tabs) {
+    browser.tabs.reload(tab.id);
+  }
+}
+
+function reloadError(error) {
+  console.log(`Error: ${error}`);
+}
+
+let querying = browser.tabs.query({});
+querying.then(reloadTabs, onError);
+
+// Listen for onHeaderReceived for the target page.
+// Set "blocking" and "responseHeaders".
+browser.webRequest.onHeadersReceived.addListener(
+  coolheadersSetup,
+  { urls: ["*://*.onion/*", "https://*/*"] },
+  ["responseHeaders"]
+);
+
+browser.webNavigation.onDOMContentLoaded.addListener(getClearTab, filter);
+browser.webNavigation.onDOMContentLoaded.addListener(
+  logOnDOMContentLoaded,
+  filter
 );

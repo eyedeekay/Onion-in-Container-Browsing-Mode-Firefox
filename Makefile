@@ -310,3 +310,6 @@ seed:
 wire:
 	cp -v "./onionbct-$(VERSION)@eyedeekay.github.io.xpi.torrent" "$(HOME)/i2p/MuWireDownloads/"
 	cp -v "../onionbct-$(VERSION)@eyedeekay.github.io.xpi" "$(HOME)/i2p/MuWireDownloads/"
+
+run:
+	$(HOME)/web-ext/bin/web-ext run --firefox /usr/bin/firefox -u about:debugging

@@ -10,10 +10,10 @@ function onSet(result) {
 // risky sites in your browser
 function disableHyperlinkAuditing() {
   var setting = browser.privacy.websites.hyperlinkAuditingEnabled.set({
-    value: false
+    value: false,
   });
   console.log("Disabling hyperlink auditing/val=", {
-    value: false
+    value: false,
   });
   setting.then(onSet);
 }
@@ -21,10 +21,10 @@ function disableHyperlinkAuditing() {
 // This enables first-party isolation
 function enableFirstPartyIsolation() {
   var setting = browser.privacy.websites.firstPartyIsolate.set({
-    value: true
+    value: true,
   });
   console.log("Enabling first party isolation/val=", {
-    value: true
+    value: true,
   });
   setting.then(onSet);
 }
@@ -34,18 +34,18 @@ function enableFirstPartyIsolation() {
 // interface for now
 function disableEvilCookies() {
   var getting = browser.privacy.websites.cookieConfig.get({});
-  getting.then(got => {
+  getting.then((got) => {
     var setting = browser.privacy.websites.cookieConfig.set({
       value: {
         behavior: "reject_third_party",
-        nonPersistentCookies: got.value.nonPersistentCookies
-      }
+        nonPersistentCookies: got.value.nonPersistentCookies,
+      },
     });
     console.log("Setting cookie behavior/val=", {
       value: {
         behavior: "reject_third_party",
-        nonPersistentCookies: got.value.nonPersistentCookies
-      }
+        nonPersistentCookies: got.value.nonPersistentCookies,
+      },
     });
     setting.then(onSet);
   });
@@ -65,10 +65,10 @@ function disableEvilCookies() {
 // this disables the use of referrer headers
 function disableReferrers() {
   var setting = browser.privacy.websites.referrersEnabled.set({
-    value: false
+    value: false,
   });
   console.log("Disabling referrer headers/val=", {
-    value: false
+    value: false,
   });
   setting.then(onSet);
 }
@@ -76,10 +76,10 @@ function disableReferrers() {
 // enable fingerprinting resistent features(letterboxing and stuff)
 function enableResistFingerprinting() {
   var setting = browser.privacy.websites.referrersEnabled.set({
-    value: true
+    value: true,
   });
   console.log("Enabling resist fingerprinting/val=", {
-    value: true
+    value: true,
   });
   setting.then(onSet);
 }
@@ -87,10 +87,10 @@ function enableResistFingerprinting() {
 // This is essentially a blocklist of clearnet web-sites known to do bad tracking
 function enableTrackingProtection() {
   var setting = browser.privacy.websites.trackingProtectionMode.set({
-    value: "always"
+    value: "always",
   });
   console.log("Enabling tracking protection/val=", {
-    value: "always"
+    value: "always",
   });
   setting.then(onSet);
 }
@@ -99,15 +99,15 @@ function enableTrackingProtection() {
 // management dependent on identifying information
 function disableDigitalRestrictionsManagement() {
   var gettingInfo = browser.runtime.getPlatformInfo();
-  gettingInfo.then(got => {
+  gettingInfo.then((got) => {
     if (got.os == "win") {
       var setting = browser.privacy.websites.protectedContentEnabled.set({
-        value: false
+        value: false,
       });
       console.log(
         "Setting Protected Content(Digital Restrictions Management) false/val=",
         {
-          value: false
+          value: false,
         }
       );
       setting.then(onSet);
@@ -129,26 +129,26 @@ setAllPrivacy();
 
 function ResetPeerConnection() {
   browser.privacy.network.peerConnectionEnabled.set({
-    value: false
+    value: false,
   });
   browser.privacy.network.networkPredictionEnabled.set({
-    value: false
+    value: false,
   });
   chrome.privacy.network.webRTCIPHandlingPolicy.set({
-    value: "disable_non_proxied_udp"
+    value: "disable_non_proxied_udp",
   });
   console.log("Re-disabled WebRTC");
 }
 
 function EnablePeerConnection() {
   browser.privacy.network.peerConnectionEnabled.set({
-    value: true
+    value: true,
   });
   browser.privacy.network.networkPredictionEnabled.set({
-    value: false
+    value: false,
   });
   chrome.privacy.network.webRTCIPHandlingPolicy.set({
-    value: "disable_non_proxied_udp"
+    value: "disable_non_proxied_udp",
   });
   console.log("Enabled WebRTC");
 }
@@ -157,14 +157,14 @@ ResetPeerConnection();
 
 function ResetDisableSavePasswords() {
   browser.privacy.services.passwordSavingEnabled.set({
-    value: false
+    value: false,
   });
   console.log("Re-disabled saved passwords");
 }
 
 function EnableSavePasswords() {
   browser.privacy.services.passwordSavingEnabled.set({
-    value: true
+    value: true,
   });
   console.log("Enabled saved passwords");
 }
@@ -173,12 +173,12 @@ function EnableSavePasswords() {
 
 var defaultSettings = {
   since: "forever",
-  dataTypes: ["downloads", "passwords", "formData", "localStorage", "history"]
+  dataTypes: ["downloads", "passwords", "formData", "localStorage", "history"],
 };
 
 var appSettings = {
   since: "forever",
-  dataTypes: [""]
+  dataTypes: [""],
 };
 
 function onError(e) {
@@ -209,7 +209,7 @@ function forgetBrowsingData(storedSettings) {
       },
       week: () => {
         return 1000 * 60 * 60 * 24 * 7;
-      }
+      },
     };
 
     const sinceMilliseconds = times[selectedSince].call();
@@ -233,7 +233,7 @@ function forgetBrowsingData(storedSettings) {
     browser.notifications.create({
       type: "basic",
       title: "Removed browsing data",
-      message: `Removed ${dataTypesString}\n for onionbrowser`
+      message: `Removed ${dataTypesString}\n for onionbrowser`,
     });
   }
 
@@ -242,41 +242,41 @@ function forgetBrowsingData(storedSettings) {
     for (item of historyItems) {
       if (onionHost(item.url)) {
         browser.history.deleteUrl({
-          url: item.url
+          url: item.url,
         });
         browser.browsingData.removeCache({});
         console.log("cleared Cache");
         browser.browsingData
           .removePasswords({
             hostnames: [onionHostName(item.url)],
-            since: since
+            since: since,
           })
           .then(onGot);
         console.log("cleared Passwords");
         browser.browsingData
           .removeDownloads({
             hostnames: [onionHostName(item.url)],
-            since: since
+            since: since,
           })
           .then(onGot);
         console.log("cleared Downloads");
         browser.browsingData
           .removeFormData({
             hostnames: [onionHostName(item.url)],
-            since: since
+            since: since,
           })
           .then(onGot);
         console.log("cleared Form Data");
         browser.browsingData
           .removeLocalStorage({
             hostnames: [onionHostName(item.url)],
-            since: since
+            since: since,
           })
           .then(onGot);
         console.log("cleared Local Storage");
 
         contexts = browser.contextualIdentities.query({
-          name: "onionbrowser"
+          name: "onionbrowser",
         });
 
         function deepCleanCookies(cookies) {
@@ -284,7 +284,7 @@ function forgetBrowsingData(storedSettings) {
             var removing = browser.cookies.remove({
               firstPartyDomain: cookie.firstPartyDomain,
               name: cookie.name,
-              url: item.url
+              url: item.url,
             });
             removing.then(onGot, onError);
           }
@@ -295,7 +295,7 @@ function forgetBrowsingData(storedSettings) {
           for (cookieStoreId of cookieStoreIds) {
             var removing = browser.cookies.getAll({
               firstPartyDomain: null,
-              storeId: cookieStoreId.cookieStoreId
+              storeId: cookieStoreId.cookieStoreId,
             });
             removing.then(deepCleanCookies, onError);
           }
@@ -309,7 +309,7 @@ function forgetBrowsingData(storedSettings) {
 
   var searching = browser.history.search({
     text: "onion",
-    startTime: 0
+    startTime: 0,
   });
 
   searching.then(deepCleanHistory);

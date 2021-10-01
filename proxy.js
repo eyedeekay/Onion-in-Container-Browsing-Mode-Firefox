@@ -1,34 +1,34 @@
 browser.privacy.network.peerConnectionEnabled.set({
-  value: false
+  value: false,
 });
 console.log("Preliminarily disabled WebRTC.");
 
 chrome.privacy.network.networkPredictionEnabled.set({
-  value: false
+  value: false,
 });
 chrome.privacy.network.webRTCIPHandlingPolicy.set({
-  value: "disable_non_proxied_udp"
+  value: "disable_non_proxied_udp",
 });
 
 function shouldProxyRequest(requestInfo) {
   return requestInfo.parentFrameId != -1;
 }
 
-var handleContextProxyRequest = async function(requestDetails) {
+var handleContextProxyRequest = async function (requestDetails) {
   console.log("(proxy)Searching for proxy by context");
   try {
-    var handleProxyRequest = function(context) {
+    var handleProxyRequest = function (context) {
       proxy = {
         failoverTimeout: 0,
         type: "direct",
-        proxyDNS: false
+        proxyDNS: false,
       };
       if (context.name == "onionbrowser") {
         proxy = {
           type: getScheme(),
           host: getHost(),
           port: getPort(),
-          proxyDNS: true
+          proxyDNS: true,
         };
         console.log(
           "(proxy)Using",
@@ -40,7 +40,7 @@ var handleContextProxyRequest = async function(requestDetails) {
       }
       return proxy;
     };
-    var contextGet = async function(tabInfo) {
+    var contextGet = async function (tabInfo) {
       try {
         console.log("(proxy)Tab info from Function", tabInfo);
         context = await browser.contextualIdentities.get(tabInfo.cookieStoreId);
@@ -49,10 +49,10 @@ var handleContextProxyRequest = async function(requestDetails) {
         console.log("(proxy)Context Error", error);
       }
     };
-    var tabFind = async function(tabId) {
+    var tabFind = async function (tabId) {
       try {
         context = await browser.contextualIdentities.query({
-          name: "onionbrowser"
+          name: "onionbrowser",
         });
         tabId.cookieStoreId = context[0].cookieStoreId;
         console.log("(proxy) forcing context", tabId.cookieStoreId);
@@ -61,7 +61,7 @@ var handleContextProxyRequest = async function(requestDetails) {
         console.log("(proxy)Context Error", error);
       }
     };
-    var tabGet = async function(tabId) {
+    var tabGet = async function (tabId) {
       try {
         console.log("(proxy)Tab ID from Request", tabId);
         let tabInfo = await browser.tabs.get(tabId);
@@ -150,7 +150,7 @@ function setupProxy() {
   /**/
   console.log("Setting up Firefox WebExtension proxy");
   browser.proxy.onRequest.addListener(handleContextProxyRequest, {
-    urls: ["<all_urls>"]
+    urls: ["<all_urls>"],
   });
   console.log("onion settings created for WebExtension Proxy");
   /**/
@@ -189,7 +189,7 @@ function update(restoredSettings) {
   console.log("restoring control port:", control_port);
 }
 
-chrome.storage.local.get(function(got) {
+chrome.storage.local.get(function (got) {
   checkStoredSettings(got);
   update(got);
   setupProxy();
@@ -197,4 +197,4 @@ chrome.storage.local.get(function(got) {
 
 // Theme all currently open windows
 
-browser.windows.getAll().then(wins => wins.forEach(themeWindow));
+browser.windows.getAll().then((wins) => wins.forEach(themeWindow));

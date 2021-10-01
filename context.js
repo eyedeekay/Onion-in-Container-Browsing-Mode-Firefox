@@ -7,7 +7,7 @@ function eventHandler(event) {
       browser.tabs.create({
         windowId: windowInfo.id,
         url: "about:blank",
-        cookieStoreId: event.target.dataset.identity
+        cookieStoreId: event.target.dataset.identity,
       });
     }
 
@@ -15,17 +15,17 @@ function eventHandler(event) {
       console.log(`Error: ${error}`);
     }
     var creating = browser.windows.create({
-      cookieStoreId: event.target.dataset.identity
+      cookieStoreId: event.target.dataset.identity,
     });
     creating.then(onCreated, onError);
   }
   if (event.target.dataset.action == "close-all") {
     browser.tabs
       .query({
-        cookieStoreId: event.target.dataset.identity
+        cookieStoreId: event.target.dataset.identity,
       })
-      .then(tabs => {
-        browser.tabs.remove(tabs.map(i => i.id));
+      .then((tabs) => {
+        browser.tabs.remove(tabs.map((i) => i.id));
       });
   }
   event.preventDefault();
@@ -51,9 +51,9 @@ if (browser.contextualIdentities === undefined) {
 } else {
   browser.contextualIdentities
     .query({
-      name: "onionbrowser"
+      name: "onionbrowser",
     })
-    .then(identities => {
+    .then((identities) => {
       if (!identities.length) {
         div.innerText = "No identities returned from the API.";
         return;

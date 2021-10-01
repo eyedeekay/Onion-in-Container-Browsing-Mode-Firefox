@@ -1,4 +1,4 @@
-document.addEventListener("click", e => {
+document.addEventListener("click", (e) => {
   function getCurrentWindow() {
     return chrome.windows.getCurrent();
   }
@@ -6,7 +6,7 @@ document.addEventListener("click", e => {
   if (e.target.id === "window-create-help-panel") {
     let createData = {
       type: "panel",
-      incognito: true
+      incognito: true,
     };
     let creating = browser.windows.create(createData);
     creating.then(() => {
@@ -15,16 +15,16 @@ document.addEventListener("click", e => {
   } else if (e.target.id === "window-create-news-panel") {
     let createData = {
       type: "panel",
-      incognito: true
+      incognito: true,
     };
     let creating = browser.windows.create(createData);
     creating.then(() => {
       console.log("The news panel has been created");
     });
   } else if (e.target.id === "window-preface-title") {
-    getCurrentWindow().then(currentWindow => {
+    getCurrentWindow().then((currentWindow) => {
       let updateInfo = {
-        titlePreface: "Onion Help | "
+        titlePreface: "Onion Help | ",
       };
       chrome.windows.update(currentWindow.id, updateInfo);
     });
