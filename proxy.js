@@ -1,8 +1,3 @@
-browser.privacy.network.peerConnectionEnabled.set({
-  value: false,
-});
-console.log("Preliminarily disabled WebRTC.");
-
 chrome.privacy.network.networkPredictionEnabled.set({
   value: false,
 });

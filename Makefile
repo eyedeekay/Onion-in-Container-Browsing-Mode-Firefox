@@ -312,4 +312,4 @@ wire:
 	cp -v "../onionbct-$(VERSION)@eyedeekay.github.io.xpi" "$(HOME)/i2p/MuWireDownloads/"
 
 run:
-	$(HOME)/web-ext/bin/web-ext run --firefox /usr/bin/firefox -u about:debugging
+	$(HOME)/web-ext/bin/web-ext run --firefox /usr/bin/firefox -u about:debugging -u https://addons.mozilla.org/en-US/firefox/addon/torproject-snowflake/?utm_source=addons.mozilla.org&utm_medium=referral&utm_content=search
