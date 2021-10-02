@@ -1,9 +1,9 @@
-var contextScrub = async function (requestDetails) {
+var contextScrub = async function(requestDetails) {
   console.log("(scrub)Scrubbing info from contextualized request");
   try {
-    var headerScrub = function (context) {
+    var headerScrub = function(context) {
       if (!context) {
-        console.error("Context not found");
+        console.log("Context not found");
       } else {
         if ((context.name = "onionbrowser")) {
           var ua = "MYOB/6.66 (AN/ON)";
@@ -16,12 +16,12 @@ var contextScrub = async function (requestDetails) {
             }
           }
           return {
-            requestHeaders: requestDetails.requestHeaders,
+            requestHeaders: requestDetails.requestHeaders
           };
         }
       }
     };
-    var contextGet = async function (tabInfo) {
+    var contextGet = async function(tabInfo) {
       try {
         console.log("(scrub)Tab info from Function", tabInfo);
         context = await browser.contextualIdentities.get(tabInfo.cookieStoreId);
@@ -30,10 +30,10 @@ var contextScrub = async function (requestDetails) {
         console.log("(scrub)Conext Error", error);
       }
     };
-    var tabFind = async function (tabId) {
+    var tabFind = async function(tabId) {
       try {
         context = await browser.contextualIdentities.query({
-          name: "onionbrowser",
+          name: "onionbrowser"
         });
         tabId.cookieStoreId = context[0].cookieStoreId;
         console.log("(scrub) forcing context", tabId.cookieStoreId);
@@ -42,7 +42,7 @@ var contextScrub = async function (requestDetails) {
         console.log("(scrub)Context Error", error);
       }
     };
-    var tabGet = async function (tabId) {
+    var tabGet = async function(tabId) {
       try {
         console.log("(scrub)Tab ID from Request", tabId);
         let tabInfo = await browser.tabs.get(tabId);
@@ -74,13 +74,13 @@ var contextScrub = async function (requestDetails) {
   }
 };
 
-var contextSetup = async function (requestDetails) {
+var contextSetup = async function(requestDetails) {
   console.log("(isolate)Forcing Onion requests into context");
   try {
-    var tabFind = async function (tabId) {
+    var tabFind = async function(tabId) {
       try {
         context = await browser.contextualIdentities.query({
-          name: "onionbrowser",
+          name: "onionbrowser"
         });
         if (tabId.cookieStoreId != context[0].cookieStoreId) {
           console.log(
@@ -102,7 +102,7 @@ var contextSetup = async function (requestDetails) {
               active: true,
               cookieStoreId: context[0].cookieStoreId,
               url: requestDetails.url,
-              windowId: window.id,
+              windowId: window.id
             });
             created.then(onCreated, onError);
           }
@@ -114,10 +114,10 @@ var contextSetup = async function (requestDetails) {
         console.log("(isolate)Context Error", error);
       }
     };
-    var routerTabFind = async function (tabId) {
+    var routerTabFind = async function(tabId) {
       try {
         context = await browser.contextualIdentities.query({
-          name: "routerconsole",
+          name: "routerconsole"
         });
         if (tabId.cookieStoreId != context[0].cookieStoreId) {
           console.log(
@@ -140,7 +140,7 @@ var contextSetup = async function (requestDetails) {
               active: true,
               cookieStoreId: context[0].cookieStoreId,
               url: requestDetails.url,
-              windowId: window.id,
+              windowId: window.id
             });
             created.then(onCreated, onError);
           }
@@ -152,7 +152,7 @@ var contextSetup = async function (requestDetails) {
         console.log("(isolate)Context Error", error);
       }
     };
-    var tabGet = async function (tabId) {
+    var tabGet = async function(tabId) {
       try {
         console.log("(isolate)Tab ID from Request", tabId);
         let tabInfo = await browser.tabs.get(tabId);
@@ -203,6 +203,7 @@ browser.webRequest.onBeforeSendHeaders.addListener(
   ["blocking", "requestHeaders"]
 );
 
+
 var coolheadersSetup = function (e) {
   var asyncSetPageAction = new Promise((resolve, reject) => {
     window.setTimeout(() => {
@@ -238,7 +239,7 @@ var coolheadersSetup = function (e) {
                 tabId: e.tabId,
               });
               let eurl = new URL(tab.url);
-              console.log("(scrub)(header check) formatted url", eurl);
+          		console.log("(scrub)(header check) formatted url", eurl);
               browser.pageAction.setTitle({
                 tabId: e.tabId,
                 title: "http://" + url.host + eurl.pathname,
@@ -372,6 +373,14 @@ browser.webRequest.onHeadersReceived.addListener(
   { urls: ["*://*.onion/*", "https://*/*"] },
   ["responseHeaders"]
 );
+
+const filter = {
+  url: [{ hostContains: ".onion" }],
+};
+
+function logOnDOMContentLoaded(details) {
+  console.log(`onDOMContentLoaded: ${details.url}`);
+}
 
 browser.webNavigation.onDOMContentLoaded.addListener(getClearTab, filter);
 browser.webNavigation.onDOMContentLoaded.addListener(

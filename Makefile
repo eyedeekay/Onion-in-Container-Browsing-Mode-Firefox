@@ -36,11 +36,11 @@ clean: rc clean-artifacts
 ## EVEN RELEASES are AMO RELEASES
 ## ODD RELEASES are SELFHOSTED RELEASES
 
-MOZ_VERSION=0.74
-VERSION=0.73
+MOZ_VERSION=0.78
+VERSION=0.77
 
 ## INCREMENT THIS EVERY TIME YOU DO A RELEASE
-LAST_VERSION=0.73
+LAST_VERSION=0.77
 
 YELLOW=F7E59A
 ORANGE=FFC56D
@@ -312,4 +312,4 @@ wire:
 	cp -v "../onionbct-$(VERSION)@eyedeekay.github.io.xpi" "$(HOME)/i2p/MuWireDownloads/"
 
 run:
-	$(HOME)/web-ext/bin/web-ext run --firefox /usr/bin/firefox -u about:debugging -u https://addons.mozilla.org/en-US/firefox/addon/torproject-snowflake/?utm_source=addons.mozilla.org&utm_medium=referral&utm_content=search
+	$(HOME)/web-ext/bin/web-ext run --firefox /usr/bin/firefox -u about:debugging -u 'https://addons.mozilla.org/en-US/firefox/addon/torproject-snowflake/?utm_source=addons.mozilla.org&utm_medium=referral&utm_content=search' -u https://i2pgit.org

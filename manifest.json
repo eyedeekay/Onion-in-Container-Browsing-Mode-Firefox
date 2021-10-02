@@ -2,7 +2,7 @@
   "applications": {
     "gecko": {
       "id": "onioncbt@eyedeekay.github.io",
-      "strict_min_version": "60.0"
+      "strict_min_version": "85.0"
     }
   },
   "permissions": [
@@ -12,6 +12,7 @@
     "proxy",
     "privacy",
     "storage",
+    "webNavigation",
     "webRequest",
     "webRequestBlocking",
     "contextualIdentities",
@@ -22,7 +23,7 @@
   ],
   "manifest_version": 2,
   "name": "__MSG_extensionName__",
-  "version": "0.73",
+  "version": "0.75",
   "description": "__MSG_extensionDescription__",
   "homepage_url": "https://github.com/eyedeekay/Onion-in-Container-Browsing-Mode-Firefox",
   "icons": {
@@ -38,7 +39,10 @@
     "browser_style": true,
     "default_title": "__MSG_extensionName__",
     "default_icon": "icons/onion.png",
-    "show_matches": ["http://*.onion/*", "https://*.onion/*"],
+    "show_matches": [
+      "http://*.onion/*",
+      "https://*.onion/*"
+    ],
     "pinned": true
   },
   "options_ui": {
