@@ -1,61 +1,61 @@
 {
-  "applications": {
-    "gecko": {
-      "id": "onioncbt@eyedeekay.github.io",
-      "strict_min_version": "85.0"
-    }
-  },
-  "permissions": [
-    "theme",
-    "browsingData",
-    "notifications",
-    "proxy",
-    "privacy",
-    "storage",
-    "webNavigation",
-    "webRequest",
-    "webRequestBlocking",
-    "contextualIdentities",
-    "cookies",
-    "history",
-    "tabs",
-    "<all_urls>"
-  ],
-  "manifest_version": 2,
-  "name": "__MSG_extensionName__",
-  "version": "0.77",
-  "description": "__MSG_extensionDescription__",
-  "homepage_url": "https://github.com/eyedeekay/Onion-in-Container-Browsing-Mode-Firefox",
-  "icons": {
-    "48": "icons/onion.png"
-  },
-  "browser_action": {
-    "browser_style": true,
-    "default_icon": "icons/onion.png",
-    "default_title": "__MSG_extensionName__",
-    "default_popup": "window.html"
-  },
-  "page_action": {
-    "browser_style": true,
-    "default_title": "__MSG_extensionName__",
-    "default_icon": "icons/onion.png",
-    "show_matches": [
-      "http://*.onion/*",
-      "https://*.onion/*"
+    "applications": {
+        "gecko": {
+            "id": "onioncbt@eyedeekay.github.io",
+            "strict_min_version": "91.1.0"
+        }
+    },
+    "permissions": [
+        "theme",
+        "browsingData",
+        "notifications",
+        "proxy",
+        "privacy",
+        "storage",
+        "webNavigation",
+        "webRequest",
+        "webRequestBlocking",
+        "contextualIdentities",
+        "cookies",
+        "history",
+        "tabs",
+        "<all_urls>"
     ],
-    "pinned": true
-  },
-  "options_ui": {
-    "page": "options/options.html"
-  },
-  "background": {
-    "scripts": [
-      "privacy.js",
-      "background.js",
-      "proxy.js",
-      "info.js",
-      "scrub.js"
-    ]
-  },
-  "default_locale": "en"
+    "manifest_version": 2,
+    "name": "__MSG_extensionName__",
+    "version": "0.79",
+    "description": "__MSG_extensionDescription__",
+    "homepage_url": "https://github.com/eyedeekay/Onion-in-Container-Browsing-Mode-Firefox",
+    "icons": {
+        "48": "icons/onion.png"
+    },
+    "browser_action": {
+        "browser_style": true,
+        "default_icon": "icons/onion.png",
+        "default_title": "__MSG_extensionName__",
+        "default_popup": "window.html"
+    },
+    "page_action": {
+        "browser_style": true,
+        "default_title": "__MSG_extensionName__",
+        "default_icon": "icons/onion.png",
+        "show_matches": [
+            "http://*.onion/*",
+            "https://*.onion/*"
+        ],
+        "pinned": true
+    },
+    "options_ui": {
+        "page": "options/options.html"
+    },
+    "background": {
+        "scripts": [
+            "privacy.js",
+            "background.js",
+            "proxy.js",
+            "info.js",
+            "scrub.js"
+        ]
+    },
+    "default_locale": "en"
 }
