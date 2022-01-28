@@ -23,7 +23,7 @@
     ],
     "manifest_version": 2,
     "name": "__MSG_extensionName__",
-    "version": "0.79",
+  "version": "0.79",
     "description": "__MSG_extensionDescription__",
     "homepage_url": "https://github.com/eyedeekay/Onion-in-Container-Browsing-Mode-Firefox",
     "icons": {
