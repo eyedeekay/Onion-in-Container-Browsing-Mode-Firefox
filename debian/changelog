@@ -1,3 +1,10 @@
+onionbct.js (0.79-1) UNRELEASED; urgency=low
+
+  * Minor CSS tweaks, WebRTC tests
+
+ -- idk <hankhill19580@gmail.com>  Thu, 17 OCT 2019 00:52:19 -0400
+
+
 onionbct.js (0.73-1) UNRELEASED; urgency=low
 
   * Create an Onion Browsing context
