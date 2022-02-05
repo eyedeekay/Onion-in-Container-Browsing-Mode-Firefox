@@ -36,11 +36,11 @@ clean: rc clean-artifacts
 ## EVEN RELEASES are AMO RELEASES
 ## ODD RELEASES are SELFHOSTED RELEASES
 
-MOZ_VERSION=0.80
-VERSION=0.79
+MOZ_VERSION=0.82
+VERSION=0.81
 
 ## INCREMENT THIS EVERY TIME YOU DO A RELEASE
-LAST_VERSION=0.77
+LAST_VERSION=0.79
 
 YELLOW=F7E59A
 ORANGE=FFC56D
@@ -155,14 +155,14 @@ copyss:
 	cp web-ext-artifacts/*.xpi ../onionbct@eyedeekay.github.io.xpi; true
 
 ##EVEN NUMBERED, MOZILLA-DISTRIBUTED VERSIONS HERE!
-moz-submit:
-#moz-submit: moz-version
+#moz-submit:
+moz-submit: moz-version
 	#@echo "Using the 'submit' target to instantly sign an extension for Mozilla distribution"
 	#@echo "requires a JWT API Key and Secret from addons.mozilla.org to be made available"
 	#@echo "to the Makefile under the variables WEB_EXT_API_KEY and WEB_EXT_API_SECRET."
 	#mv manifest.json .manifest.json
 	#grep -v update_url .manifest.json > manifest.json
-	#web-ext sign --channel listed --config-discovery false --api-key $(WEB_EXT_API_KEY) --api-secret $(WEB_EXT_API_SECRET); true
+	web-ext sign --channel listed --config-discovery false --api-key $(WEB_EXT_API_KEY) --api-secret $(WEB_EXT_API_SECRET); true
 	#sleep 5
 	#mv .manifest.json manifest.json
 
