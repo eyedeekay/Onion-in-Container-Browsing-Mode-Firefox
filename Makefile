@@ -92,7 +92,7 @@ moz-version:
 	#sed -si 's|$(shell grep $(LAST_VERSION) _locales/en/messages.json)|    "message": "$(MOZ_VERSION)",|g' _locales/en/messages.json; true
 	#sed -si 's|$(shell grep $(VERSION) _locales/en/messages.json)|    "message": "$(MOZ_VERSION)",|g' _locales/en/messages.json; true
 
-zip: version
+zip:
 	zip --exclude="./onionbct@eyedeekay.github.io.xpi" \
 		--exclude="./onionbct.js@eyedeekay.github.io.xpi" \
 		--exclude="./onionbct.js.png" \
