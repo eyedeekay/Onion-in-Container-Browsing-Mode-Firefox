@@ -1,48 +1,56 @@
 <!DOCTYPE html>
-
 <html>
-  <head>
+<head>
     <meta charset="utf-8">
-    <link rel="stylesheet" type="text/css" href="home.css" />
-    <link rel="stylesheet" href="info.css"/>
-  </head>
-
-  <body>
+    <link href="home.css" rel="stylesheet" type="text/css">
+    <link href="info.css" rel="stylesheet">
+    <title>
+    </title>
+</head>
+<body>
     <div class="panel">
-      <div class="panel-section panel-section-header">
-        <div id="text-section-header" class="text-section-header">Onion Assistance</div>
-      </div>
+        <div class="panel-section panel-section-header">
+            <div class="text-section-header" id="text-section-header">
+                Onion Assistance
+            </div>
+        </div>
 
-      <div id="text-section-helptext">
-      You can now create a container tab which uses Tor to browse the web
-      privately.
+        <div id="text-section-helptext">
+            You can now create a container tab which uses Tor to browse the web privately.
+        </div>
 
-      </div>
+        <div class="panel-section-separator">
+        </div>
+        <!-- This is where I'll eventually put the tunnel control panel -->
+        <!-- <a href="#" id="generate-fresh-tunnel> Generate a Fresh Tunnel</a>"-->
+        <!-- -->
+        <strong><a href="#" id="clear-browser-data">Clear all browsing data</a></strong>
+        <br>
 
-      <div class="panel-section-separator"></div>
-          <!-- This is where I'll eventually put the tunnel control panel -->
-          <!-- <a href="#" id="generate-fresh-tunnel> Generate a Fresh Tunnel</a>"-->
-          <!-- -->
-      <strong><a href="#" id="clear-browser-data">Clear all browsing data</a></strong><br>
-      <div class="panel-section-separator"></div>
-          <a href="http://torproject.org" id="window-create-news-panel">Get the latest Tor News</a><br>
-      <div class="panel-section-separator"></div>
-      <div class="panel-section-separator"></div>
-          <!--<a href="#" id="check-onion-control">Check Onion Router Health</a><div id="panel-section-onioncontrol-check"></div>-->
-      <div class="panel-section-separator"></div>
-      <div class="panel-section-identity">
-          <div id="identity-list"></div>
-      </div>
+        <div class="panel-section-separator">
+        </div>
+        <a href="http://torproject.org" id="window-create-news-panel">Get the latest Tor News</a>
+        <br>
 
+        <div class="panel-section-separator">
+        </div>
+
+        <div class="panel-section-separator">
+        </div>
+        <!--<a href="#" id="check-onion-control">Check Onion Router Health</a><div id="panel-section-onioncontrol-check"></div>-->
+
+        <div class="panel-section-separator">
+        </div>
+
+        <div class="panel-section-identity">
+            <div id="identity-list">
+            </div>
+        </div>
     </div>
-
-
-  <script src="context.js"></script>
-  <script src="privacy.js"></script>
-  <script src="info.js"></script>
-  <script src="content.js" crossorigin="anonymous"></script>
-  <script src="onioncontrol.js"></script>
-
+    <script src="context.js"></script> 
+    <script src="privacy.js"></script> 
+    <script src="info.js"></script> 
+    <script crossorigin="anonymous" src="content.js"></script> 
+    <script src="onioncontrol.js"></script>
 </body>
-
 </html>
