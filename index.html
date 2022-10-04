@@ -1,156 +1,112 @@
+<!DOCTYPE html>
 <html>
-  <head>
-    <title>
-      Onion in Contain...
-    </title>
-    <meta name="author" content="eyedeekay" />
-    <meta name="description" content="onion-in-container-browsing-mode-firefox" />
-    <meta name="keywords" content="master" />
-    <link rel="stylesheet" type="text/css" href="style.css" />
-    <link rel="stylesheet" type="text/css" href="showhider.css" />
-  </head>
-  <body>
+<head>
+    <title>Onion in Contain...</title>
+    <meta content="eyedeekay" name="author">
+    <meta content="onion-in-container-browsing-mode-firefox" name="description">
+    <meta content="master" name="keywords">
+    <link href="style.css" rel="stylesheet" type="text/css">
+    <link href="showhider.css" rel="stylesheet" type="text/css">
+</head>
+<body>
     <div id="navbar">
-      <a href="#shownav">
-        Show navigation
-      </a>
-      <div id="shownav">
-        <div id="hidenav">
-          <ul>
-            <li>
-              <a href="..">
-                Up one level ^
-              </a>
-            </li>
-            <li>
-              <a href="index.html">
-                index
-              </a>
-            </li>
-            <li>
-              <a href="PLAN.html">
-                PLAN
-              </a>
-            </li>
-          </ul>
-          <br>
-          <a href="#hidenav">
-            Hide Navigation
-          </a>
+        <a href="#shownav">Show navigation</a>
+        <div id="shownav">
+            <div id="hidenav">
+                <ul>
+                    <li>
+                        <a href="..">Up one level ^</a>
+                    </li>
+
+                    <li>
+                        <a href="index.html">index</a>
+                    </li>
+
+                    <li>
+                        <a href="PLAN.html">PLAN</a>
+                    </li>
+                </ul>
+
+                <br>
+                <a href="#hidenav">Hide Navigation</a>
+            </div>
         </div>
-      </div>
     </div>
-    <a id="returnhome" href="/">
-      /
-    </a>
-    <h1>
-      Onion in Container Tabs Mode for Firefox
-    </h1>
-    <p>
-      This is an extremely experimental, extremely unofficial project to enable
-      browsing .onion sites and clearnet sites via Tor in regular Firefox. The
-      strongest privacy protection for this activity is still Tor Browser and will
-      be for a long time. To get Tor Browser, go here:
-    </p>
+    <a href="/" id="returnhome">/</a>
+    <h1>Onion in Container Tabs Mode for Firefox</h1>
+
+    <p>This is an extremely experimental, extremely unofficial project to enable browsing .onion sites and clearnet sites via Tor in regular Firefox. The strongest privacy protection for this activity is still Tor Browser and will be for a long time. To get Tor Browser, go here:</p>
+
     <ul>
-      <li>
-        <a href="https://www.torproject.org/download">
-          Tor Browser
-        </a>
-      </li>
-    </ul>
-    <p>
-      The purpose of this extension is to experiment with side-by-side integration of
-      Tor and I2P in mainline Firefox and potentially, a hardened Firefox
-      distribution.
-    </p>
-    <p>
-      This is a meager prototype, it lacks functionality and shouldn&rsquo;t be used under
-      any circumstances to protect your anonymity at this time. If and or when that
-      becomes an option, the contexts in which that is true will be made clear.
-    </p>
-    <h2>
-      Super Extra Important Background Info:
-    </h2>
-    <p>
-      This plugin&rsquo;s viability is directly related to the viability of Mozilla and
-      Tor&rsquo;s work on hardening Firefox itself and of particular interest are the
-      &ldquo;Uplift&rdquo; and &ldquo;Fusion(Firefox Using Onions)&rdquo; projects.
-    </p>
-    <h3>
-      Links about Project Uplift
-    </h3>
-    <ul>
-      <li>
-        <a href="https://wiki.mozilla.org/Security/Tor_Uplift">
-          https://wiki.mozilla.org/Security/Tor_Uplift
-        </a>
-      </li>
-      <li>
-        <a href="https://wiki.mozilla.org/Security/FirstPartyIsolation">
-          https://wiki.mozilla.org/Security/FirstPartyIsolation
-        </a>
-      </li>
-      <li>
-        <a href="https://wiki.mozilla.org/Security/Fingerprinting">
-          https://wiki.mozilla.org/Security/Fingerprinting
-        </a>
-      </li>
-      <li>
-        <a href="https://wiki.mozilla.org/Security/Fennec%2BTor_Project">
-          https://wiki.mozilla.org/Security/Fennec%2BTor_Project
-        </a>
-      </li>
-      <li>
-        <a href="https://wiki.mozilla.org/Security/Tor_Uplift/Tracking">
-          https://wiki.mozilla.org/Security/Tor_Uplift/Tracking
-        </a>
-      </li>
-    </ul>
-    <p>
-      Project uplift seems to have largely been accomplished?
-    </p>
-    <h3>
-      Links about Project Fusion
-    </h3>
-    <ul>
-      <li>
-        <a href="https://wiki.mozilla.org/Security/Fusion">
-          https://wiki.mozilla.org/Security/Fusion
-        </a>
-      </li>
-      <li>
-        <a href="https://trac.torproject.org/projects/tor/wiki/org/meetings/2018Rome/Notes/FusionProject">
-          https://trac.torproject.org/projects/tor/wiki/org/meetings/2018Rome/Notes/FusionProject
-        </a>
-      </li>
-      <li>
-        <a href="https://blog.torproject.org/tor-heart-firefox">
-          https://blog.torproject.org/tor-heart-firefox
-        </a>
-      </li>
-    </ul>
-    <div id="sourcecode">
-      <span id="sourcehead">
-        <strong>
-          Get the source code:
-        </strong>
-      </span>
-      <ul>
         <li>
-          <a href="https://github.com/eyedeekay/onion-in-container-browsing-mode-firefox">
-            Source Repository: (https://github.com/eyedeekay/onion-in-container-browsing-mode-firefox)
-          </a>
+            <a href="https://www.torproject.org/download">Tor Browser</a>
         </li>
-      </ul>
+    </ul>
+
+    <p>The purpose of this extension is to experiment with side-by-side integration of Tor and I2P in mainline Firefox and potentially, a hardened Firefox distribution.</p>
+
+    <p>This is a meager prototype, it lacks functionality and shouldn’t be used under any circumstances to protect your anonymity at this time. If and or when that becomes an option, the contexts in which that is true will be made clear.</p>
+
+    <h2>Super Extra Important Background Info:</h2>
+
+    <p>This plugin’s viability is directly related to the viability of Mozilla and Tor’s work on hardening Firefox itself and of particular interest are the “Uplift” and “Fusion(Firefox Using Onions)” projects.</p>
+
+    <h3>Links about Project Uplift</h3>
+
+    <ul>
+        <li>
+            <a href="https://wiki.mozilla.org/Security/Tor_Uplift">https://wiki.mozilla.org/Security/Tor_Uplift</a>
+        </li>
+
+        <li>
+            <a href="https://wiki.mozilla.org/Security/FirstPartyIsolation">https://wiki.mozilla.org/Security/FirstPartyIsolation</a>
+        </li>
+
+        <li>
+            <a href="https://wiki.mozilla.org/Security/Fingerprinting">https://wiki.mozilla.org/Security/Fingerprinting</a>
+        </li>
+
+        <li>
+            <a href="https://wiki.mozilla.org/Security/Fennec%2BTor_Project">https://wiki.mozilla.org/Security/Fennec%2BTor_Project</a>
+        </li>
+
+        <li>
+            <a href="https://wiki.mozilla.org/Security/Tor_Uplift/Tracking">https://wiki.mozilla.org/Security/Tor_Uplift/Tracking</a>
+        </li>
+    </ul>
+
+    <p>Project uplift seems to have largely been accomplished?</p>
+
+    <h3>Links about Project Fusion</h3>
+
+    <ul>
+        <li>
+            <a href="https://wiki.mozilla.org/Security/Fusion">https://wiki.mozilla.org/Security/Fusion</a>
+        </li>
+
+        <li>
+            <a href="https://trac.torproject.org/projects/tor/wiki/org/meetings/2018Rome/Notes/FusionProject">https://trac.torproject.org/projects/tor/wiki/org/meetings/2018Rome/Notes/FusionProject</a>
+        </li>
+
+        <li>
+            <a href="https://blog.torproject.org/tor-heart-firefox">https://blog.torproject.org/tor-heart-firefox</a>
+        </li>
+    </ul>
+
+    <div id="sourcecode">
+        <span id="sourcehead"><strong>Get the source code:</strong></span>
+        <ul>
+            <li>
+                <a href="https://github.com/eyedeekay/onion-in-container-browsing-mode-firefox">Source Repository: (https://github.com/eyedeekay/onion-in-container-browsing-mode-firefox)</a>
+            </li>
+        </ul>
     </div>
+
     <div>
-      <a href="#show">
-        Show license
-      </a>
-      <div id="show">
-        <div id="hide">
-          <pre><code>MIT License
+        <a href="#show">Show license</a>
+        <div id="show">
+            <div id="hide">
+                <pre><code>MIT License
 
 Copyright (c) 2019 idk
 
@@ -171,21 +127,17 @@ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
 LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
-</code></pre>
-          <a href="#hide">
-            Hide license
-          </a>
+</code></pre><a href="#hide">Hide license</a>
+            </div>
         </div>
-      </div>
     </div>
+
     <div>
-      <iframe src="https://snowflake.torproject.org/embed.html" width="320" height="240" frameborder="0" scrolling="no"></iframe>
+        <iframe frameborder="0" height="240" scrolling="no" src="https://snowflake.torproject.org/embed.html" width="320"></iframe>
     </div>
+
     <div>
-      <a href="https://geti2p.net/">
-        <img src="i2plogo.png"></img>
-        I2P
-      </a>
+        <a href="https://geti2p.net/"><img src="i2plogo.png"> I2P</a>
     </div>
-  </body>
+</body>
 </html>

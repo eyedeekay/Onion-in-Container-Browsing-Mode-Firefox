@@ -104,8 +104,46 @@ function themeWindow(window) {
         .get(tabInfo[0].cookieStoreId)
         .then(onGot, onError);
     } else {
-      chrome.theme.reset(window.id);
+      //chrome.theme.reset(window.id);
+      unsetTheme();
     }
+  }
+
+  function unsetTheme() {
+    console.log("(theme)Resetting theme window to stored theme");
+
+    function gotAllThemes(infoArray) {
+      for (const info of infoArray) {
+        if (info.type === "theme") {
+          if (info.enabled) {
+            console.log("(theme) found enabled theme in list", info.id);
+
+            async function resetEnabled(disabled) {
+              console.log("(theme) disabled theme temporarily", info.id);
+
+              function logReset(prom) {
+                console.log("(theme) re-enabled:", info.id);
+              }
+
+              function sleep(ms) {
+                return new Promise((resolve) => setTimeout(resolve, ms));
+              }
+              var slept = await sleep(2000);
+
+              function sleepyTime(sleepyTimeOver) {
+                return browser.management.setEnabled(info.id, true);
+              }
+              let settingEnabled = sleepyTime(slept);
+              logReset(settingEnabled);
+            }
+            let settingDisabled = browser.management.setEnabled(info.id, false);
+            resetEnabled(settingDisabled);
+          }
+        }
+      }
+    }
+    let gettingAll = browser.management.getAll();
+    gettingAll.then(gotAllThemes);
   }
 
   var querying = browser.tabs.query({
